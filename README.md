@@ -63,7 +63,7 @@ OperatorType.Equal corresponds to
     
 ### Controller
     
-    To apply the filter to your set of entities, retrieve them from your database as IQueryable object and use `ConstructQuerySearch` extension method
+To apply the filter to your set of entities, retrieve them from your database as IQueryable object and use `ConstructQuerySearch` extension method
     
 ```csharp
       IQueryable<Order> query = dbContext.Orders.AsQueryable();
