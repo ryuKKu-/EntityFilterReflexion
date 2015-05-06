@@ -75,7 +75,7 @@ To apply the filter to your set of entities, retrieve them from your database as
 ```
     Note : `Way` must be equals to `asc` or `desc`
     
-    And appy pagination ...
+    And apply pagination ...
 ```csharp
       var results = order.ApplyPagination(viewModel.PageSize, viewModel.Page);
 ```
