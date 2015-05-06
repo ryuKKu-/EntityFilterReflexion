@@ -79,4 +79,5 @@ To apply the filter to your set of entities, retrieve them from your database as
 ```csharp
       var results = order.ApplyPagination(viewModel.PageSize, viewModel.Page);
 ```
+
     
