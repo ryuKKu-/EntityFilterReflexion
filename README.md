@@ -1,11 +1,12 @@
-# EntityFilterReflexion
-Filter a set of entities from view-model properties based on reflexion
-Support deep-linked entities
+EntityFilterReflexion
+=
 
-  ## Example
-  
-    ### Entities
-    ```csharp
+Filter a set of entities from view-model properties based on reflexion.
+Support deep-linked entities properties
+
+## Example
+### Entities
+```csharp
     Entity User :
       public string Id { get; set; }
       public string Name { get; set; }
@@ -20,19 +21,19 @@ Support deep-linked entities
       [ForeignKey("User")]
       public string UserId { get; set; }
       public virtual ApplicationUser User { get; set; }
-    ```
+```
     
-    ### ViewModel
+### ViewModel
+
+Apply the attribute `FilterWhere` on properties (corresponding to your entity properties) that need to be filtered.
+This library is using reflexion to find the corresponding property in your entity, so if your view-model property's name differs, use `OnProperty` attribute. `Operator` corresponds to the type of expression used in the `Where` clause.
     
-    Apply the attribute `FilterWhere` on properties (corresponding to your entity properties) that need to be filtered.
-    This library is using reflexion to find the corresponding property in your entity, so if your view-model property's name differs, use `OnProperty` attribute. `Operator` corresponds to the type of expression used in the `Where` clause.
-    
-    OperatorType.Equal corresponds to 
-    ```csharp
+OperatorType.Equal corresponds to 
+```csharp
       .Where(x => x.Prop == "foo")
-    ```
+```
     
-    ```csharp
+```csharp
       [FilterWhere(Operator = OperatorType.EqualDate)]
       public DateTime? Date { get; set; }
       
@@ -58,24 +59,24 @@ Support deep-linked entities
       public string Way { get; set; }
       public int PageSize { get; set; }
       public int Page { get; set; }
-    ```
+```
     
-    ### Controller
+### Controller
     
-    To apply the filter to your set of entities, retrieve them from your database as IQueryable object and use       `ConstructQuerySearch`extension method
+    To apply the filter to your set of entities, retrieve them from your database as IQueryable object and use `ConstructQuerySearch` extension method
     
-    ```csharp
+```csharp
       IQueryable<Order> query = dbContext.Orders.AsQueryable();
       var filtered = query.ConstructQuerySearch(viewModel);
-    ```
+```
     You can also order your results by using `OrderByReflexion` extension method
-    ```csharp
+```csharp
       var order = filtered.OrderByReflexion(viewModel.Order, viewModel.Way);
-    ```
+```
     Note : `Way` must be equals to `asc` or `desc`
     
     And appy pagination ...
-    ```csharp
+```csharp
       var results = order.ApplyPagination(viewModel.PageSize, viewModel.Page);
-    ```
+```
     
