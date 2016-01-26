@@ -82,7 +82,7 @@ Example
 ```
 
 This will compile to the following LINQ query : 
-orders.Where(x => x.Goods.First(g => g.MerchantId == model.MerchId).Price == model.GoodPrice);
+`orders.Where(x => x.Goods.First(g => g.MerchantId == model.MerchId).Price == model.GoodPrice);`
 
 
 
